@@ -4,7 +4,7 @@ This is a Docker Compose template for running mage.ai with postgres as a backend
 
 ## 🙋‍♂️ Why did you create it?
 
-This compose template is intended to be used for lightweight batch data integration tasks. The mage conmtainer has had root access removed.
+This compose template is intended to be used for lightweight batch data integration tasks. The mage container has had root access removed.
 
 ## Setup Steps:
 
