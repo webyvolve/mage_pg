@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mage:
+    #image: mageai/mageai:latest
+    container_name: magic
+    depends_on:
+      - postgres
+    command: mage start magic
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile_Mage
+    environment:
+      ENV: dev
+    ports:
+      - 6789:6789
+    volumes:
+      - mage_data:/home/src/
+    restart: on-failure:5
+  
+  postgres: # Use Postgres as backend for mage - storing users, secrets, etc.
+    image: postgres:latest
+    restart: on-failure
+    container_name: postgres-magic
+    build:
+      context: ./db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${PG_HOST_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Use named volume setup externally option
+      
+volumes:
+  pgdata: # if volume "pgdata" exists, use it, otherwise create it
+  mage_data: # if volume "mage_data" exists, use it, otherwise create it
