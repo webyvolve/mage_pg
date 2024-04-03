@@ -9,4 +9,4 @@ This compose template is intended to be used for lightweight batch data integrat
 ## Setup Steps:
 
 1. Consider updating the postgres credentials since in the .env file since they are default values.
-2. Update network settings for services mage and postgres if not working locally.
+2. Update network settings for services mage and postgres in the compose yaml file if not working locally.
